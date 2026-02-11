@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Valentine ❤️</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        body {
+            background-color: #ffdeeb;
+            margin: 0;
+            font-family: sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden; /* This prevents the blank white scroll */
+            position: fixed; /* Keeps everything locked in view */
+            width: 100%;
+        }
+
+        .container {
+            text-align: center;
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            width: 85%;
+            max-width: 300px;
+            z-index: 100; /* Ensures content stays on top */
+        }
+
+        img { width: 150px; border-radius: 10px; }
+        h1 { color: #e91e63; font-size: 20px; margin: 15px 0; }
+
+        .btns {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            min-height: 50px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+        }
+
+        #yesBtn { background: #ff4081; color: white; }
+        #noBtn { background: #a1a1a1; color: white; position: absolute; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <img id="gif" src="https://media.giphy.com/media/cLS1cfxvGOPVpf9g3y/giphy.gif">
+    <h1 id="text">Will you be my Valentine?</h1>
+    <div class="btns">
+        <button id="yesBtn">Yes</button>
+        <button id="noBtn">No</button>
+    </div>
+</div>
+
+<script>
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+    const gif = document.getElementById("gif");
+    const text = document.getElementById("text");
+
+    function moveNo() {
+        // Keeps the button inside the visible screen only
+        const x = Math.random() * (window.innerWidth - 80);
+        const y = Math.random() * (window.innerHeight - 40);
+        noBtn.style.left = x + "px";
+        noBtn.style.top = y + "px";
+    }
+
+    noBtn.addEventListener("touchstart", (e) => { e.preventDefault(); moveNo(); });
+    noBtn.addEventListener("mouseover", moveNo);
+
+    yesBtn.addEventListener("click", () => {
+        text.innerHTML = "I KNEW IT! ❤️";
+        gif.src = "https://media.giphy.com/media/26FLdmIp6wJr91JAI/giphy.gif";
+        noBtn.style.display = "none";
+        confetti();
+    });
+</script>
+</body>
+</html>
